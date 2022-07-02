@@ -26,7 +26,8 @@ export default {
 		const response = await fetch(`https://vue-http-demo-8e969-default-rtdb.firebaseio.com/coaches.json`);
 		const responseData = await response.json();
 		if (!response.ok) {
-			// errors...
+			const error = new Error(responseData.message || 'Failed to fetch');
+			throw error;
 		}
 		const coaches = [];
 		for (const key in responseData) {
